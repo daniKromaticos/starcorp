@@ -5,9 +5,13 @@
   },
   "build": {
     "dev": {
+      "developmentClient": true,
       "distribution": "internal",
       "autoIncrement": true,
-      "channel": "dev"
+      "channel": "dev",
+      "android": {
+        "buildType": "apk"
+      }
     },
     "preview": {
       "distribution": "internal",
