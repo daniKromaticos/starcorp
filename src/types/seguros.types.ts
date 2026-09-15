@@ -80,9 +80,22 @@ export interface PolizaVehiculo {
   motivoInactividad?: string | null;
 }
 
+/**
+ * Póliza de propiedad — filas con `Tipo de Seguro = CASA`. Salen del
+ * mismo tablero que Compañías y Vehículos, así que traen las mismas
+ * columnas (Aseguradora / Broker / Numero de Poliza / Costo Total / LLC).
+ */
 export interface PolizaPropiedad {
   id: string;
   nombre: string;
+  /** LLC dueña de la póliza (columna "LLC" de Notion). */
+  empresaId: string;
+  /** Nombre de la LLC. '' cuando la fila no la trae. */
+  empresaName: string;
+  aseguradora: string;
+  broker: string;
+  numero: string;
+  costo: number;
   vigenciaFin: string;
   estado?: PolizaEstadoNotion;
   motivoInactividad?: string | null;

@@ -325,11 +325,13 @@ export default function SegurosScreen() {
           porVencer={propiedadesPorVencer.map<AlertItem>((p) => ({
             id: p.id,
             title: p.nombre,
+            subtitle: p.empresaName,
             subline: buildSubline(p.vigenciaFin, todayIso),
           }))}
           vencidas={propiedadesVencidas.map<AlertItem>((p) => ({
             id: p.id,
             title: p.nombre,
+            subtitle: p.empresaName,
             subline: buildSubline(p.vigenciaFin, todayIso),
           }))}
           onItemPress={(id) =>

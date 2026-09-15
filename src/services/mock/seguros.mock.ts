@@ -160,10 +160,10 @@ const VEHICULOS: PolizaVehiculo[] = [
 ];
 
 const PROPIEDADES: PolizaPropiedad[] = [
-  { id: 'prop-1', nombre: 'Nitarry', vigenciaFin: addDays(TODAY_ISO, -3) },
-  { id: 'prop-2', nombre: 'Mount Pocono', vigenciaFin: addDays(TODAY_ISO, -320), estado: 'inactiva', motivoInactividad: 'VENCIDA' },
-  { id: 'prop-3', nombre: 'Camelback', vigenciaFin: addDays(TODAY_ISO, 22) },
-  { id: 'prop-4', nombre: 'Great Wolf', vigenciaFin: addDays(TODAY_ISO, 90) },
+  { id: 'prop-1', nombre: 'Nitarry', empresaId: '5-stars', empresaName: '5 Stars', aseguradora: 'Travelers', broker: 'Assurance Group', numero: 'CASA-1001', costo: 4200, vigenciaFin: addDays(TODAY_ISO, -3) },
+  { id: 'prop-2', nombre: 'Mount Pocono', empresaId: 'mcs', empresaName: 'MCS', aseguradora: 'Chubb', broker: 'Assurance Group', numero: 'CASA-1002', costo: 3850, vigenciaFin: addDays(TODAY_ISO, -320), estado: 'inactiva', motivoInactividad: 'VENCIDA' },
+  { id: 'prop-3', nombre: 'Camelback', empresaId: 'one-a', empresaName: 'One A', aseguradora: 'Nationwide', broker: 'Brown & Brown', numero: 'CASA-1003', costo: 5100, vigenciaFin: addDays(TODAY_ISO, 22) },
+  { id: 'prop-4', nombre: 'Great Wolf', empresaId: '5-stars', empresaName: '5 Stars', aseguradora: 'Travelers', broker: 'Brown & Brown', numero: 'CASA-1004', costo: 6400, vigenciaFin: addDays(TODAY_ISO, 90) },
 ];
 
 const SNAPSHOT: SegurosSnapshot = {

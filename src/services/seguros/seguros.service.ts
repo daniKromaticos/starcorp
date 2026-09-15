@@ -67,6 +67,9 @@ const TIPO_TO_BUCKET: Record<string, Bucket> = {
   Prop: 'propiedad',
   Propiedad: 'propiedad',
   Property: 'propiedad',
+  // El tablero rotula las pólizas de propiedad como "CASA".
+  CASA: 'propiedad',
+  Casa: 'propiedad',
 };
 
 const TIPO_TO_NOMBRE_POLIZA: Record<string, string> = {
@@ -81,7 +84,8 @@ function bucketize(tipo: string | null): Bucket | null {
   // Heurística por substring (case-insensitive) para tolerar variantes
   const lower = tipo.toLowerCase();
   if (lower.includes('veh') || lower.includes('auto')) return 'vehiculo';
-  if (lower.includes('prop')) return 'propiedad';
+  if (lower.includes('prop') || lower.includes('casa') || lower.includes('hogar'))
+    return 'propiedad';
   // Resto se considera póliza de compañía
   return 'compania';
 }
@@ -379,10 +383,23 @@ function buildPolizaVehiculo(
   };
 }
 
-function buildPolizaPropiedad(row: NormalizedRow): PolizaPropiedad {
+function buildPolizaPropiedad(
+  row: NormalizedRow,
+  llcNames: Map<string, string>,
+): PolizaPropiedad {
+  // Mismo tablero que Compañías y Vehículos: la fila de una casa también
+  // trae Aseguradora / Broker / Numero de Poliza / Costo Total / LLC.
+  const empresa = resolveEmpresa(row, llcNames);
   return {
     id: row.id,
     nombre: toStr(pickField(row, COL_NOMBRE)),
+    empresaId: empresa.id,
+    // Sin LLC preferimos ocultar el campo antes que pintar "Sin empresa".
+    empresaName: empresa.id === 'sin-empresa' ? '' : empresa.name,
+    aseguradora: toStr(pickField(row, COL_ASEGURADORA)),
+    broker: toStr(pickField(row, COL_BROKER)),
+    numero: toStr(pickField(row, COL_NUMERO)),
+    costo: toNum(pickField(row, COL_COSTO)),
     vigenciaFin: toDate(pickField(row, COL_VIGENCIA_FIN)),
     estado: parseEstado(pickField(row, COL_ESTADO)),
     motivoInactividad: resolveMotivoInactividad(row),
@@ -434,7 +451,7 @@ async function fetchFromNotion(): Promise<SegurosSnapshot> {
   return {
     empresas: [...empresasMap.values()],
     vehiculos: vehiculoRows.map((r) => buildPolizaVehiculo(r, llcNames)),
-    propiedades: propiedadRows.map(buildPolizaPropiedad),
+    propiedades: propiedadRows.map((r) => buildPolizaPropiedad(r, llcNames)),
     updatedAt: todayIso,
     todayIso,
   };

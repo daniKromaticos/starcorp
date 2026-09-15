@@ -1,15 +1,22 @@
 /**
  * Molecule: MlPropiedadDetailCard
  *
- * Card de póliza de Propiedad: header "Seguro" + nombre, divider, y
- * un campo de Vigencia/Vencimiento.
+ * Card de póliza de Propiedad (filas "CASA" del tablero). Mismo layout
+ * que MlVehiculoDetailCard: header "Propiedad / Costo" con el nombre +
+ * costo en bold, divider, y grid con los campos (Aseguradora, Empresa,
+ * Broker, Número, Vigencia, Vencimiento). El campo Vencimiento se pinta
+ * en rojo/ámbar cuando la póliza está vencida o por vencer.
+ *
+ * Los campos que la fila de Notion no trae se muestran como "--" para
+ * no romper la grid.
  */
 
 import React, { memo } from 'react';
 import { View } from '@/src/tw';
 import { AtTypography } from '@/src/components/atoms/at-typography';
-import { AtIcon } from '@/src/components/atoms/at-icon';
+import { AtIcon, type AtIconProps } from '@/src/components/atoms/at-icon';
 import { AtDivider } from '@/src/components/atoms/at-divider';
+import { formatCurrency } from '@/src/utils/currency';
 import {
   diffInDays,
   formatVigenciaDate,
@@ -25,10 +32,42 @@ interface MlPropiedadDetailCardProps {
   highlighted?: boolean;
 }
 
+interface FieldProps {
+  icon: AtIconProps['name'];
+  iconVariant?: AtIconProps['variant'];
+  label: string;
+  value: string;
+}
+
+const Field = memo<FieldProps>(({ icon, iconVariant, label, value }) => (
+  <View className="flex-1 gap-1">
+    <View className="flex-row items-center gap-1.5">
+      <AtIcon
+        name={icon as never}
+        variant={iconVariant as never}
+        size="sm"
+        color="#1A1F36"
+      />
+      <AtTypography variant="bodyBold" color="#1A1F36">
+        {label}
+      </AtTypography>
+    </View>
+    <AtTypography variant="caption" color="#4A5568">
+      {value}
+    </AtTypography>
+  </View>
+));
+Field.displayName = 'Field';
+
 function formatVencimiento(days: number): string {
   if (days < 0) return `${days} días`;
   if (days === 0) return 'Hoy';
   return `${days} días`;
+}
+
+/** Placeholder para las columnas vacías de Notion. */
+function orDash(value: string): string {
+  return value.trim() || '--';
 }
 
 export const MlPropiedadDetailCard = memo<MlPropiedadDetailCardProps>(
@@ -53,39 +92,70 @@ export const MlPropiedadDetailCard = memo<MlPropiedadDetailCardProps>(
             : undefined,
         }}
       >
-        <View>
-          <AtTypography variant="caption" color="#8892A4">
-            Seguro
-          </AtTypography>
-          <AtTypography variant="bodyBold" color="#1A1F36">
-            {poliza.nombre}
-          </AtTypography>
-          {inactiva && (
-            <View
-              className="self-start mt-1 rounded-full px-2 py-0.5"
-              style={{ backgroundColor: 'rgba(0,0,0,0.06)' }}
-            >
-              <AtTypography variant="caption" color="#4A5568">
-                {inactivaLabel(poliza)}
-              </AtTypography>
-            </View>
-          )}
+        <View className="flex-row items-start justify-between gap-3">
+          <View className="flex-1">
+            <AtTypography variant="caption" color="#8892A4">
+              Propiedad
+            </AtTypography>
+            <AtTypography variant="bodyBold" color="#1A1F36">
+              {poliza.nombre}
+            </AtTypography>
+            {inactiva && (
+              <View
+                className="self-start mt-1 rounded-full px-2 py-0.5"
+                style={{ backgroundColor: 'rgba(0,0,0,0.06)' }}
+              >
+                <AtTypography variant="caption" color="#4A5568">
+                  {inactivaLabel(poliza)}
+                </AtTypography>
+              </View>
+            )}
+          </View>
+          <View className="items-end">
+            <AtTypography variant="caption" color="#8892A4">
+              Costo
+            </AtTypography>
+            <AtTypography variant="bodyBold" color="#1A1F36">
+              {poliza.costo ? formatCurrency(poliza.costo) : '--'}
+            </AtTypography>
+          </View>
         </View>
 
         <AtDivider />
 
         <View className="flex-row gap-4">
-          <View className="flex-1 gap-1">
-            <View className="flex-row items-center gap-1.5">
-              <AtIcon name="schedule" size="sm" color="#1A1F36" />
-              <AtTypography variant="bodyBold" color="#1A1F36">
-                Vigencia
-              </AtTypography>
-            </View>
-            <AtTypography variant="caption" color="#4A5568">
-              {formatVigenciaDate(poliza.vigenciaFin)}
-            </AtTypography>
-          </View>
+          <Field
+            icon="shield"
+            iconVariant="community"
+            label="Aseguradora"
+            value={orDash(poliza.aseguradora)}
+          />
+          {poliza.empresaName ? (
+            <Field icon="business" label="Empresa" value={poliza.empresaName} />
+          ) : (
+            <View className="flex-1" />
+          )}
+        </View>
+
+        <View className="flex-row gap-4">
+          <Field
+            icon="account-circle"
+            label="Broker"
+            value={orDash(poliza.broker)}
+          />
+          <Field
+            icon="format-list-numbered"
+            label="Número"
+            value={orDash(poliza.numero)}
+          />
+        </View>
+
+        <View className="flex-row gap-4">
+          <Field
+            icon="schedule"
+            label="Vigencia"
+            value={formatVigenciaDate(poliza.vigenciaFin)}
+          />
           <View className="flex-1 gap-1">
             <View className="flex-row items-center gap-1.5">
               {alert && <AtIcon name="warning-amber" size="sm" color={color} />}
@@ -96,10 +166,7 @@ export const MlPropiedadDetailCard = memo<MlPropiedadDetailCardProps>(
                 Vencimiento
               </AtTypography>
             </View>
-            <AtTypography
-              variant="caption"
-              color={alert ? color : '#4A5568'}
-            >
+            <AtTypography variant="caption" color={alert ? color : '#4A5568'}>
               {formatVencimiento(days)}
             </AtTypography>
           </View>
