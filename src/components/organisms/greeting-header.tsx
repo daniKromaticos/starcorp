@@ -5,7 +5,8 @@
  */
 
 import React, { memo } from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
+import { Text } from '@/src/tw';
 import { tokens } from '@/src/theme/tokens';
 
 interface GreetingHeaderProps {

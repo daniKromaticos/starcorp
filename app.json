@@ -1,28 +1,35 @@
 {
   "expo": {
-    "name": "starcorp",
+    "name": "5core",
     "slug": "starcorp",
-    "owner": "kromaticosdan",
-    "version": "1.0.1",
+    "owner": "starcorp",
+    "version": "2.0.2",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "starcorp",
     "userInterfaceStyle": "automatic",
-    "newArchEnabled": true,
     "updates": {
-      "enabled": false
+      "url": "https://u.expo.dev/2c51a567-7b48-4e86-b073-71c91b063566",
+      "enabled": true
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.kromaticos.starcorp",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
+      "package": "com.kromaticos.starcorp",
       "adaptiveIcon": {
-        "backgroundColor": "#E6F4FE",
+        "backgroundColor": "#000000",
         "foregroundImage": "./assets/images/android-icon-foreground.png",
         "backgroundImage": "./assets/images/android-icon-background.png",
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
-      "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false
     },
     "web": {
@@ -37,14 +44,15 @@
           "image": "./assets/images/splash-icon.png",
           "imageWidth": 200,
           "resizeMode": "contain",
-          "backgroundColor": "#ffffff",
+          "backgroundColor": "#000000",
           "dark": {
             "backgroundColor": "#000000"
           }
         }
       ],
       "expo-secure-store",
-      "expo-web-browser"
+      "expo-web-browser",
+      "expo-font"
     ],
     "experiments": {
       "typedRoutes": true,
@@ -53,7 +61,7 @@
     "extra": {
       "router": {},
       "eas": {
-        "projectId": "9bfa9b8f-230a-4d01-9612-29cef567497a"
+        "projectId": "2c51a567-7b48-4e86-b073-71c91b063566"
       }
     }
   }

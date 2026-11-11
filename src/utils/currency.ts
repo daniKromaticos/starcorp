@@ -19,12 +19,26 @@ export function formatCurrency(
     return formatCompactCurrency(value, locale, currency);
   }
 
-  return new Intl.NumberFormat(locale, {
-    style: 'currency',
-    currency,
+  // Use narrowSymbol so USD renders as "$" instead of "US$" in es-* locales.
+  const sign = value < 0 ? '-' : '';
+  const abs = new Intl.NumberFormat(locale, {
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,
-  }).format(value);
+  }).format(Math.abs(value));
+  return `${sign}$${abs}`;
+}
+
+/**
+ * Format with two decimals and es-AR separators: $17.958,25
+ * (Informe Presupuesto: columnas Proyectado/Ejecutado).
+ */
+export function formatMoney2(value: number): string {
+  const sign = value < 0 ? '-' : '';
+  const abs = new Intl.NumberFormat('es-AR', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }).format(Math.abs(value));
+  return `${sign}$${abs}`;
 }
 
 /**

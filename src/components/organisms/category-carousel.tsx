@@ -6,7 +6,7 @@
  */
 
 import React, { memo } from 'react';
-import { ScrollView, View, Text } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import { CategoryTab } from '@/src/components/molecules/category-tab';
 import { tokens } from '@/src/theme/tokens';
 import { mockCategories } from '@/src/services/mock/data.mock';

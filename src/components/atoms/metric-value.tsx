@@ -6,7 +6,8 @@
  */
 
 import React, { memo } from 'react';
-import { Text, type TextStyle } from 'react-native';
+import { type TextStyle } from 'react-native';
+import { Text } from '@/src/tw';
 import { tokens } from '@/src/theme/tokens';
 import { formatCurrency } from '@/src/utils/currency';
 

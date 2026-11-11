@@ -32,6 +32,13 @@ yarn-error.*
 
 # local env files
 .env*.local
+.env
+
+# MCP (contiene tokens)
+.mcp.json
+
+# Claude Code worktrees (local-only, never commit)
+.claude/worktrees/
 
 # typescript
 *.tsbuildinfo

@@ -6,7 +6,8 @@
  */
 
 import React, { memo, useMemo } from 'react';
-import { View, Text, Pressable, useWindowDimensions } from 'react-native';
+import { View, Pressable, useWindowDimensions } from 'react-native';
+import { Text } from '@/src/tw';
 import { tokens } from '@/src/theme/tokens';
 import { shadows } from '@/src/theme/shadows';
 import { StatusBadge } from '@/src/components/atoms/status-badge';

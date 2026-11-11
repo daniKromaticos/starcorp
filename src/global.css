@@ -1,0 +1,111 @@
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/preflight.css" layer(base);
+@import "tailwindcss/utilities.css";
+
+/* ─── Platform Fonts ─── */
+@media android {
+  :root {
+    --font-mono: monospace;
+    --font-rounded: normal;
+    --font-serif: serif;
+    --font-sans: Roboto_400Regular;
+  }
+}
+
+@media ios {
+  :root {
+    --font-mono: ui-monospace;
+    --font-serif: ui-serif;
+    --font-sans: system-ui;
+    --font-rounded: ui-rounded;
+  }
+}
+
+/* ─── StarCorp Design Tokens ─── */
+@layer theme {
+  @theme {
+    /* ── Backgrounds ── */
+    --color-bg-primary: #FFFFFF;
+    --color-bg-secondary: #F6F8FA;
+    --color-bg-tertiary: #EBEBF0;
+    --color-bg-card: #FFFFFF;
+    --color-bg-card-elevated: #FAFBFC;
+
+    /* ── Ink (Text) ── */
+    --color-ink-primary: #1A1F36;
+    --color-ink-secondary: #4A5568;
+    --color-ink-tertiary: #8892A4;
+    --color-ink-inverse: #FFFFFF;
+
+    /* ── Accent (Amber/Orange) ── */
+    --color-accent: #E8952E;
+    --color-accent-secondary: #F6AD55;
+    --color-accent-muted: #FEEBC8;
+
+    /* ── Semantic ── */
+    --color-positive: #38A169;
+    --color-positive-light: #C6F6D5;
+    --color-negative: #E53E3E;
+    --color-negative-light: #FED7D7;
+    --color-warning: #DD6B20;
+    --color-info: #3182CE;
+
+    /* ── Chart Palette ── */
+    --color-chart-1: #1A2B6D;
+    --color-chart-2: #2D4BA0;
+    --color-chart-3: #4A7FD4;
+    --color-chart-4: #E8952E;
+    --color-chart-5: #F6AD55;
+    --color-chart-6: #A0AEC0;
+    --color-chart-7: #48BB78;
+    --color-chart-8: #ED64A6;
+
+    /* ── Navy (Headers/Cards Dark) ── */
+    --color-navy: #1A2B6D;
+    --color-navy-deep: #0F1B4A;
+
+    /* ── Borders ── */
+    --color-border: rgba(0, 0, 0, 0.08);
+    --color-border-subtle: rgba(0, 0, 0, 0.04);
+    --color-border-emphasis: rgba(0, 0, 0, 0.15);
+
+    /* ── Spacing ── */
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 12px;
+    --spacing-lg: 16px;
+    --spacing-xl: 20px;
+    --spacing-2xl: 24px;
+    --spacing-3xl: 32px;
+    --spacing-4xl: 40px;
+    --spacing-5xl: 48px;
+
+    /* ── Border Radius ── */
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 14px;
+    --radius-xl: 20px;
+
+    /* ── Shadows ── */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.12);
+    --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+
+    /* ── Typography Scale ── */
+    --text-xs: 11px;
+    --text-xs--line-height: 1.4;
+    --text-sm: 13px;
+    --text-sm--line-height: 1.4;
+    --text-base: 15px;
+    --text-base--line-height: 1.5;
+    --text-lg: 18px;
+    --text-lg--line-height: 1.4;
+    --text-xl: 22px;
+    --text-xl--line-height: 1.3;
+    --text-2xl: 28px;
+    --text-2xl--line-height: 1.2;
+    --text-3xl: 32px;
+    --text-3xl--line-height: 1.1;
+  }
+}

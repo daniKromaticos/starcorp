@@ -13,13 +13,11 @@ jobs:
       EXPO_DOCTOR_ENABLE_DIRECTORY_CHECK: false
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v7
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v5
         with:
-          node-version: "20.x"
-      - name: Install expo-cli
-        run: npm install expo-cli -g
+          node-version: "22.x"
       - name: Install dependencies
         run: npm ci
       - name: Run expo doctor

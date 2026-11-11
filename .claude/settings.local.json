@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx expo:*)",
+      "Bash(npm view:*)",
+      "Bash(npx tsc:*)",
+      "Bash(ls src/components/atoms/at-*)",
+      "Bash(ls src/components/molecules/ml-*)",
+      "Bash(ls src/components/organisms/or-*)",
+      "Bash(ls src/components/templates/tm-*)",
+      "Bash(gh pr create --base dev --title 'feat: Atomic Design + NativeWind v5 + Roboto' --body ':*)",
+      "Bash(gh auth:*)",
+      "Bash(git -C \"C:/Users/soydc/Kromaticos/starcorp/.claude/worktrees/distracted-noether\" status)",
+      "Bash(git -C \"C:/Users/soydc/Kromaticos/starcorp/.claude/worktrees/fervent-visvesvaraya\" status)",
+      "Bash(git status *)",
+      "mcp__supabase__list_tables",
+      "mcp__supabase__get_edge_function",
+      "mcp__supabase__execute_sql",
+      "Bash(npx eslint *)",
+      "Bash(node report_gaps.mjs)"
+    ]
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "figma",
+    "supabase"
+  ]
+}

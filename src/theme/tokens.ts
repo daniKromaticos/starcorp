@@ -6,6 +6,8 @@
  *
  * Para agregar gradientes: ver src/theme/gradients.ts
  */
+import { CHART_COLORS } from './chart-palette';
+
 export const tokens = {
   color: {
     // Superficie
@@ -22,6 +24,8 @@ export const tokens = {
       secondary: '#4A5568',
       tertiary: '#8892A4',
       inverse: '#FFFFFF',
+      // Gris azulado para títulos/labels secundarios dentro de tarjetas.
+      label: '#464A6B',
     },
     // Accent — Naranja ámbar del mockup
     accent: {
@@ -38,17 +42,9 @@ export const tokens = {
       warning: '#DD6B20',
       info: '#3182CE',
     },
-    // Gráficos — Paleta del mockup (azules/navys/naranjas)
-    chart: [
-      '#1A2B6D',
-      '#2D4BA0',
-      '#4A7FD4',
-      '#E8952E',
-      '#F6AD55',
-      '#A0AEC0',
-      '#48BB78',
-      '#ED64A6',
-    ] as const,
+    // Gráficos — tono sólido de los 8 degradados canónicos (ver chart-palette.ts).
+    // Es el primer color de cada degradado, ciclado por índice.
+    chart: CHART_COLORS,
     // Bordes
     border: {
       default: 'rgba(0, 0, 0, 0.08)',
@@ -100,3 +96,20 @@ export const tokens = {
 
 export type TokenColors = typeof tokens.color;
 export type TokenSpacing = keyof typeof tokens.spacing;
+
+/**
+ * Tope al escalado de fuente del sistema (Dynamic Type en iOS, "Tamaño de
+ * fuente" en Android). Sin tope, un iPhone con texto grande multiplica las
+ * fuentes ×1.3–3 y rompe columnas de ancho fijo ("Client/e", "Tota/l").
+ * Lo aplican por defecto los wrappers Text/TextInput de `@/src/tw`.
+ */
+export const MAX_FONT_SCALE = 1.15;
+
+/**
+ * Si el texto sigue el tamaño de fuente del sistema. En `false` la app ignora
+ * por completo Dynamic Type / "Tamaño de fuente" (ni crece ni se achica) y
+ * MAX_FONT_SCALE deja de tener efecto: aun ×1.15 rompía columnas ajustadas
+ * en un iPhone con texto grande. Para volver a respetar el ajuste del
+ * usuario con tope, poner `true`.
+ */
+export const ALLOW_SYSTEM_FONT_SCALING = false;

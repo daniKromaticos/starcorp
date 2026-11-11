@@ -1,77 +1,65 @@
 /**
  * Auth Store — Zustand
  *
- * Manages OAuth tokens and user session.
- * Tokens are persisted in SecureStore for security.
+ * Estado de la sesión Supabase para el gate de navegación
+ * (app/_layout.tsx). La persistencia de la sesión la maneja el propio
+ * cliente de Supabase (AsyncStorage, ver src/config/supabase.ts); aquí
+ * solo se refleja el estado para la UI.
+ *
+ * `passwordRecovery`: al verificar el código OTP de recovery Supabase
+ * crea una sesión real. Sin este flag, el gate mandaría al usuario a la
+ * app antes de que escriba su nueva contraseña. Mientras esté en true,
+ * el usuario permanece en el grupo (auth) hasta completar el cambio.
  */
 
 import { create } from 'zustand';
-import * as SecureStore from 'expo-secure-store';
-
-interface User {
-  name: string;
-  email: string;
-  companyId: string;
-}
+import type { Session } from '@supabase/supabase-js';
+import { getSession, onAuthStateChange } from '@/src/services/auth/auth.service';
+import { toAuthUser, type AuthStatus, type AuthUser } from '@/src/types/auth.types';
 
 interface AuthState {
-  qbAccessToken: string | null;
-  qbRefreshToken: string | null;
-  azureAccessToken: string | null;
-  user: User | null;
-  isAuthenticated: boolean;
+  status: AuthStatus;
+  session: Session | null;
+  user: AuthUser | null;
+  passwordRecovery: boolean;
 
-  setQBTokens: (access: string, refresh: string) => void;
-  setAzureToken: (token: string) => void;
-  setUser: (user: User) => void;
-  logout: () => void;
-  hydrateFromSecureStore: () => Promise<void>;
+  setSession: (session: Session | null) => void;
+  setPasswordRecovery: (value: boolean) => void;
+  /** Lee la sesión persistida y se suscribe a cambios. Devuelve unsubscribe. */
+  initialize: () => () => void;
+}
+
+/** Las sesiones anónimas (usadas antes del login real) no cuentan como login. */
+function isRealSession(session: Session | null): session is Session {
+  return !!session && !session.user.is_anonymous;
 }
 
 export const useAuthStore = create<AuthState>((set) => ({
-  qbAccessToken: null,
-  qbRefreshToken: null,
-  azureAccessToken: null,
+  status: 'loading',
+  session: null,
   user: null,
-  isAuthenticated: false,
+  passwordRecovery: false,
 
-  setQBTokens: async (access, refresh) => {
-    await SecureStore.setItemAsync('qb_access_token', access);
-    await SecureStore.setItemAsync('qb_refresh_token', refresh);
-    set({ qbAccessToken: access, qbRefreshToken: refresh });
+  setSession: (session) => {
+    if (isRealSession(session)) {
+      set({ status: 'signedIn', session, user: toAuthUser(session.user) });
+    } else {
+      set({ status: 'signedOut', session: null, user: null, passwordRecovery: false });
+    }
   },
 
-  setAzureToken: async (token) => {
-    await SecureStore.setItemAsync('azure_token', token);
-    set({ azureAccessToken: token });
-  },
+  setPasswordRecovery: (value) => set({ passwordRecovery: value }),
 
-  setUser: (user) => set({ user, isAuthenticated: true }),
+  initialize: () => {
+    getSession()
+      .then((session) => useAuthStore.getState().setSession(session))
+      .catch(() => set({ status: 'signedOut', session: null, user: null }));
 
-  logout: async () => {
-    await SecureStore.deleteItemAsync('qb_access_token');
-    await SecureStore.deleteItemAsync('qb_refresh_token');
-    await SecureStore.deleteItemAsync('azure_token');
-    set({
-      qbAccessToken: null,
-      qbRefreshToken: null,
-      azureAccessToken: null,
-      user: null,
-      isAuthenticated: false,
-    });
-  },
-
-  hydrateFromSecureStore: async () => {
-    const [qbAccess, qbRefresh, azure] = await Promise.all([
-      SecureStore.getItemAsync('qb_access_token'),
-      SecureStore.getItemAsync('qb_refresh_token'),
-      SecureStore.getItemAsync('azure_token'),
-    ]);
-    set({
-      qbAccessToken: qbAccess,
-      qbRefreshToken: qbRefresh,
-      azureAccessToken: azure,
-      isAuthenticated: !!(qbAccess && azure),
+    return onAuthStateChange((session) => {
+      const state = useAuthStore.getState();
+      // Durante el flujo de recovery, verifyOtp emite SIGNED_IN: reflejar
+      // la sesión sin sacar al usuario del grupo (auth) — el flag manda.
+      state.setSession(session);
     });
   },
 }));

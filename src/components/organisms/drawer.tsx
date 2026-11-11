@@ -5,13 +5,13 @@
 import React, { useEffect, useRef } from 'react';
 import {
   View,
-  Text,
   Animated,
   TouchableOpacity,
   StyleSheet,
   Dimensions,
   StatusBar,
 } from 'react-native';
+import { Text } from '@/src/tw';
 import { tokens } from '@/src/theme/tokens';
 import { Icon, IconName } from '@/src/components/atoms';
 

@@ -31,20 +31,6 @@ export interface NormalizedClient {
   source: 'quickbooks' | 'powerbi';
 }
 
-export interface NormalizedCashFlow {
-  inflows: number;
-  outflows: number;
-  net: number;
-  deltaPercent: number;
-  sparklineData: TimeSeriesPoint[];
-  breakdown: CashFlowBreakdownItem[];
-}
-
-export interface CashFlowBreakdownItem {
-  category: string;
-  amount: number;
-}
-
 export interface NormalizedCategory {
   id: string;
   label: string;
@@ -61,4 +47,99 @@ export interface PeriodRange {
   key: PeriodKey;
   start: string;
   end: string;
+}
+
+// ─── Consolidados (Ingresos/Costos/Gastos/Utilidad) ─────────────
+
+export type ConsolidadoCategoryId =
+  | 'ingresos'
+  | 'costos'
+  | 'gastos'
+  | 'utilidad'
+  | 'egresos';
+
+export interface ConsolidadoClient {
+  id: string;
+  name: string;
+  amount: number;
+  deltaPercent: number;
+  color: string;
+}
+
+export interface ConsolidadoMetric {
+  value: number;
+  deltaPercent: number;
+}
+
+export interface ClientConsolidadoDetail {
+  id: string;
+  name: string;
+  amount: number;
+  deltaPercent: number;
+  deltaAbsolute: number;
+  series: TimeSeriesPoint[];
+  location: string;
+  employees: number;
+  leader: number;
+  vigencia: number;
+  metrics: {
+    ingreso: ConsolidadoMetric;
+    costo: ConsolidadoMetric;
+    gastos: ConsolidadoMetric;
+    utilidadNeta: ConsolidadoMetric;
+    utilidadBruta: ConsolidadoMetric;
+    cartera: ConsolidadoMetric;
+    margen: ConsolidadoMetric;
+  };
+}
+
+export interface CostGroup {
+  id: string;
+  label: string;
+  icon: string;
+  color: string;
+  amount: number;
+  deltaPercent: number;
+}
+
+export interface ThirdParty {
+  id: string;
+  name: string;
+  color: string;
+  gradientColors: [string, string];
+  amount: number;
+  deltaPercent: number;
+}
+
+export interface ExpenseCentral {
+  total: number;
+  deltaPercent: number;
+}
+
+// ─── Financiero (companies) ─────────────────────────────────────
+
+export interface Company {
+  id: string;
+  name: string;
+}
+
+export interface CompanyMetric {
+  value: number;
+  deltaPercent: number;
+}
+
+export interface CompanyMetrics {
+  ingresos: CompanyMetric;
+  costos: CompanyMetric;
+  egresos: CompanyMetric;
+  utilidadBruta: CompanyMetric;
+  utilidadNeta: CompanyMetric;
+}
+
+export interface IngresoCliente {
+  id: string;
+  name: string;
+  color: string;
+  amount: number;
+  deltaPercent: number;
 }

@@ -1,3 +1,40 @@
+// ── New Organisms (NativeWind + AtTypography + AtIcon) ──
+export { OrGreetingHeader } from './or-greeting-header';
+export { OrRevenueChartCard } from './or-revenue-chart-card';
+export { OrCategoryCarousel } from './or-category-carousel';
+export type { CategoryItem } from './or-category-carousel';
+export { OrTopClientsSection } from './or-top-clients-section';
+export { OrDrawer } from './or-drawer';
+export type { DrawerMenuItem as OrDrawerMenuItem, OrDrawerProps } from './or-drawer';
+export { OrBarChart } from './or-bar-chart';
+export { OrDonutChart } from './or-donut-chart';
+export { OrAreaChart } from './or-area-chart';
+export { OrClientList } from './or-client-list';
+export type { ClientListItem } from './or-client-list';
+export { OrFinancialSummary, OrPrimaryMetrics, OrSecondaryMetrics } from './or-financial-summary';
+export type { FinancialMetric } from './or-financial-summary';
+export { OrFinancieroSection } from './or-financiero-section';
+export type { CompanySummary } from './or-financiero-section';
+export { OrInformesSection } from './or-informes-section';
+export { OrRecentReportsSection } from './or-recent-reports-section';
+export { OrCategoryList } from './or-category-list';
+export type { CategoryListItem } from './or-category-list';
+export { OrTercerosList } from './or-terceros-list';
+export { OrPowerBIReport } from './or-powerbi-report';
+export { OrPowerBIMetricCard } from './or-powerbi-metric-card';
+export { OrConsolidadoClientList } from './or-consolidado-client-list';
+export { OrClientDetailMetrics } from './or-client-detail-metrics';
+export { OrCostGroupsChartCard } from './or-cost-groups-chart-card';
+export { OrThirdPartiesDonutCard } from './or-third-parties-donut-card';
+export { OrExpenseCentralCard } from './or-expense-central-card';
+export { OrHighlightedBarChartCard } from './or-highlighted-bar-chart-card';
+export type { HighlightedBarChartPoint } from './or-highlighted-bar-chart-card';
+export { OrDepartmentsCarousel } from './or-departments-carousel';
+export { OrTareasAccordionList } from './or-tareas-accordion-list';
+export { OrTaskDetailCard } from './or-task-detail-card';
+export { OrTaskAvancesList } from './or-task-avances-list';
+
+// ── Legacy (kept for backward compatibility during migration) ──
 export { GreetingHeader } from './greeting-header';
 export { RevenueChartCard } from './revenue-chart-card';
 export { CategoryCarousel } from './category-carousel';

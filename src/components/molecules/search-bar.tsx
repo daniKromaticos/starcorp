@@ -5,7 +5,8 @@
  */
 
 import React, { memo, useState } from 'react';
-import { View, TextInput, Text, Pressable } from 'react-native';
+import { View, Pressable } from 'react-native';
+import { Text, TextInput } from '@/src/tw';
 import { tokens } from '@/src/theme/tokens';
 import { shadows } from '@/src/theme/shadows';
 

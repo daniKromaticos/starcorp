@@ -6,7 +6,8 @@
  */
 
 import React, { memo } from 'react';
-import { View, Text, Pressable } from 'react-native';
+import { View, Pressable } from 'react-native';
+import { Text } from '@/src/tw';
 import { tokens } from '@/src/theme/tokens';
 
 interface CategoryTabProps {
