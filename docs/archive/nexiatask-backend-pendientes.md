@@ -1,3 +1,7 @@
+<p align="right"><img src="../assets/isologo-badge.png" alt="Kromaticos" width="44"></p>
+
+> **Archivado 2026-11-25.** Documento histórico; ya no describe el estado actual. Ver [../README.md](../README.md).
+
 # NexiaTask — Pendientes con equipo backend
 
 Documento para alinear con el equipo de NexiaTask (contacto: blue.solutions2025@gmail.com)

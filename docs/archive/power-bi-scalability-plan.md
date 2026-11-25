@@ -1,3 +1,7 @@
+<p align="right"><img src="../assets/isologo-badge.png" alt="Kromaticos" width="44"></p>
+
+> **Archivado 2026-11-25.** Documento histórico; ya no describe el estado actual. Ver [../README.md](../README.md).
+
 # Power BI — Plan de escalabilidad
 
 Plan para evolucionar el consumo de Power BI del MVP actual hacia una arquitectura que soporte ≥500 usuarios concurrentes sin tocar los límites del service principal ni del dataset.
@@ -228,7 +232,7 @@ Queryable desde `supabase/functions/_logs` o exportado a Supabase Logs. Sin esto
 
 ## Referencias
 
-- Guía actual: `docs/power-bi-integration.md`.
+- Guía actual: `docs/integraciones/power-bi.md`.
 - Edge Functions: `supabase/functions/powerbi-*`.
 - Hooks: `src/hooks/queries/use-powerbi-*.ts`.
 - Límites oficiales PBI: https://learn.microsoft.com/power-bi/developer/embedded/embedded-capacity-limits.

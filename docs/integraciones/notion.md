@@ -1,3 +1,7 @@
+<p align="right"><img src="../assets/isologo-badge.png" alt="Kromaticos" width="44"></p>
+
+> **Estado 2026-11-25.** Vigente en lo general. Desde 2026-08-25 Seguros lee el **tablero real** de pólizas (antes una copia CSV de otro workspace) y resuelve la relation LLC contra un segundo tablero; `NOTION_ALLOWED_DBS` debe incluir ambos ids. El token es de integración interna (`NOTION_TOKEN` en `starcorp_vault`), no OAuth por usuario.
+
 # Notion — Guía de conexión y extracción de un tablero
 
 Guía paso a paso para conectar la app Starcorp (Expo / React Native) a un **tablero (database) de Notion** y traer sus filas. Alineada con `CLAUDE.md` + `SKILL.md`: **el cliente nunca llama a `api.notion.com` directo**; toda petición pasa por una Supabase Edge Function que valida el JWT del usuario y rehidrata el token desde `starcorp_vault`.
@@ -46,7 +50,7 @@ El resto del doc cubre **Internal**. Al final hay una sección §12 con los delt
 ## 2. Pre-requisitos
 
 - Cuenta admin en el workspace de Notion donde vive el tablero.
-- Proyecto Supabase con tabla `starcorp_vault` (ver `docs/quickbooks-integration.md` §3 o `docs/power-bi-integration.md` §3.1).
+- Proyecto Supabase con tabla `starcorp_vault` (ver `docs/integraciones/quickbooks.md` §3 o `docs/integraciones/power-bi.md` §3.1).
 - `supabase` CLI instalada y logueada (`supabase login`, `supabase link --project-ref <ref>`).
 
 No hace falta instalar paquetes en el cliente — el cliente solo hace `fetch` a la Edge Function.
@@ -463,7 +467,7 @@ Si en algún momento cada usuario debe conectar **su propio** workspace de Notio
 
 1. En notion.so/my-integrations → cambiar el tipo de la integration de `Internal` a `Public`. Notion entrega `OAuth client ID` + `OAuth client secret` + obliga a registrar `Redirect URI`.
 2. Redirect URI: `https://<project-ref>.supabase.co/functions/v1/notion-oauth-callback`.
-3. Crear tabla `notion_user_tokens` análoga a `qb_user_tokens` (ver `docs/quickbooks-integration.md` §4) — Notion **no rota refresh tokens** y el `access_token` no expira hasta que el usuario revoque, así que el schema es más simple:
+3. Crear tabla `notion_user_tokens` análoga a `qb_user_tokens` (ver `docs/integraciones/quickbooks.md` §4) — Notion **no rota refresh tokens** y el `access_token` no expira hasta que el usuario revoque, así que el schema es más simple:
    ```sql
    create table notion_user_tokens (
      user_id      uuid primary key references auth.users on delete cascade,

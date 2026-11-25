@@ -1,3 +1,5 @@
+<p align="right"><img src="../assets/isologo-badge.png" alt="Kromaticos" width="44"></p>
+
 # Integración QuickBooks Online — Costos y Alcances
 
 **Documento informativo para cliente**

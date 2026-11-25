@@ -1,10 +1,14 @@
+<p align="right"><img src="../assets/isologo-badge.png" alt="Kromaticos" width="44"></p>
+
+> **Estado 2026-11-25.** El razonamiento sigue vigente. Para el inventario actual de tablas, edge functions y secretos ver [../04-backend-supabase.md](../04-backend-supabase.md).
+
 # Por qué Supabase — el rol que cumple en las integraciones Power BI y QuickBooks
 
 Este documento explica **para qué se necesita Supabase** en Starcorp y por qué es el eje que hace posible (y seguras) las conexiones con Power BI y QuickBooks desde la app Expo / React Native.
 
 Documentos relacionados:
-- [`power-bi-integration.md`](./power-bi-integration.md) — guía técnica Power BI
-- [`quickbooks-integration.md`](./quickbooks-integration.md) — guía técnica QuickBooks
+- [`power-bi.md`](./power-bi.md) — guía técnica Power BI
+- [`quickbooks.md`](./quickbooks.md) — guía técnica QuickBooks
 
 ---
 
@@ -197,7 +201,7 @@ Supabase te da los **7 componentes** en una sola plataforma con tier gratuito su
 Consultado vía MCP `supabase list_edge_functions`:
 
 - ✅ **`powerbi-execute-query`** — activa, v1, `verify_jwt: true`.
-- ❌ **QuickBooks: ninguna Edge Function desplegada.** `qb-oauth-callback` y `qb-query` están documentadas en [`quickbooks-integration.md`](./quickbooks-integration.md) pero no existen aún en el proyecto remoto.
+- ❌ **QuickBooks: ninguna Edge Function desplegada.** `qb-oauth-callback` y `qb-query` están documentadas en [`quickbooks.md`](./quickbooks.md) pero no existen aún en el proyecto remoto.
 - ❌ El directorio local `supabase/functions/` no existe — el código fuente de `powerbi-execute-query` no está versionado en este repo.
 
 ### Próximos pasos sugeridos

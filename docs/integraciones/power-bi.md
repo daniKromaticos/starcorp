@@ -1,3 +1,7 @@
+<p align="right"><img src="../assets/isologo-badge.png" alt="Kromaticos" width="44"></p>
+
+> **Estado 2026-11-25.** El setup de Azure / service principal sigue vigente. La arquitectura cambió: casi todos los informes ya no consultan Power BI en vivo, sino que leen tablas de Supabase que llenan las edge functions `pbi-sync-*` por cron (ver [../05-linaje-de-datos.md](../05-linaje-de-datos.md)). Solo **Presupuesto** usa `powerbi-execute-query` en vivo. `powerbi-embed-token` / WebView no se usa en ninguna pantalla. Los secretos `azure_*` viven en `starcorp_vault` en MAYÚSCULAS (`AZURE_TENANT_ID`, …).
+
 # Power BI — Guía de conexión y extracción de datos
 
 Guía end-to-end para conectar la app Starcorp (Expo / React Native) a Power BI y extraer datos de un dataset. Alineada con `CLAUDE.md` + `SKILL.md`: **el cliente nunca llama la API de Power BI**; toda petición pasa por una Supabase Edge Function que valida el JWT del usuario.

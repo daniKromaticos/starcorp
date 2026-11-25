@@ -1,3 +1,5 @@
+<p align="right"><img src="../assets/isologo-badge.png" alt="Kromaticos" width="44"></p>
+
 ====================================================
   NEXIATASK — API DE INTEGRACIÓN
   Para uso exclusivo del área de Sistemas

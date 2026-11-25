@@ -1,50 +1,31 @@
-# Welcome to your Expo app 👋
+<p align="right"><img src="docs/assets/isologo-badge.png" alt="Kromaticos" width="44"></p>
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+# 5core (Starcorp)
 
-## Get started
+App móvil de reportería ejecutiva del grupo 5 Stars: consolidado contable, financiero por empresa, bancos, cartera, asociados, pagos, presupuesto, seguros y tareas, en un solo lugar.
 
-1. Install dependencies
+Expo SDK 54 (development build) · React Native · expo-router · TanStack Query · Supabase (Postgres, Edge Functions, Auth) · Power BI · QuickBooks Online · Notion.
 
-   ```bash
-   npm install
-   ```
-
-2. Start the app
-
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+## Inicio rápido
 
 ```bash
-npm run reset-project
+npm install
+cp .env.example .env   # o pide el .env al responsable; ver docs/02-setup-y-deploy.md
+npm start              # requiere el dev client instalado (no Expo Go)
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+Chequeos: `npx tsc --noEmit` y `npm run lint`.
 
-## Learn more
+Push a `dev` → OTA al canal de desarrollo. Push a `main` → producción.
 
-To learn more about developing your project with Expo, look at the following resources:
+## Documentación
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+Toda la documentación está en [`docs/`](docs/README.md):
 
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- [Arquitectura](docs/01-arquitectura.md)
+- [Setup y deploy](docs/02-setup-y-deploy.md)
+- [App (frontend)](docs/03-app-frontend.md)
+- [Backend Supabase](docs/04-backend-supabase.md)
+- [Linaje de datos por informe](docs/05-linaje-de-datos.md)
+- [Reglas de negocio](docs/06-reglas-de-negocio.md)
+- [Runbook de operación](docs/07-runbook-operacion.md)

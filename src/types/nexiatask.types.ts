@@ -4,7 +4,7 @@
  * Tipos crudos de la API externa NexiaTask (https://nexiatask-api.onrender.com)
  * + tipos UI agrupados (departamento → proyecto → tareas) construidos
  * client-side hasta que backend exponga el concepto de "proyecto/iniciativa
- * padre" (ver docs/nexiatask-backend-pendientes.md).
+ * padre" (ver docs/archive/nexiatask-backend-pendientes.md).
  */
 
 import type React from 'react';
@@ -36,7 +36,7 @@ export type NexiataskPrioridad = 'Alta' | 'Media' | 'Baja';
  * Una tarea dentro de `GET /api/integration/avance`. El endpoint
  * `/seguimiento` fue reemplazado por `/avance`; `responsabilidad` expone
  * la iniciativa padre (antes la agrupábamos con un heurístico — ver
- * docs/nexiatask-backend-pendientes.md). Desde 2026-06 el endpoint
+ * docs/archive/nexiatask-backend-pendientes.md). Desde 2026-06 el endpoint
  * volvió a devolver `resultado` (mismo valor que `seguimiento`, por
  * compatibilidad) y `cumplimiento_pct` ya nunca llega `null` (0 si no
  * hay medición esa semana).

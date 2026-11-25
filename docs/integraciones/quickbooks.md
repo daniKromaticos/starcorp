@@ -1,3 +1,7 @@
+<p align="right"><img src="../assets/isologo-badge.png" alt="Kromaticos" width="44"></p>
+
+> **Estado 2026-11-25.** El flujo OAuth sigue vigente, con estos cambios: solo un **super_admin** puede conectar o desconectar empresas; hay varias empresas (multi-realm) en `qb_user_tokens`, todas bajo el usuario `ADMIN_USER_ID` del vault (los tokens están en `qb_user_tokens`, no en `starcorp_vault`). QuickBooks alimenta **Financiero** y **Cartera**; el informe **Bancos ya no usa QuickBooks** (viene de Power BI). Ver [../07-runbook-operacion.md](../07-runbook-operacion.md#5-conectar-o-reconectar-una-empresa-de-quickbooks).
+
 # QuickBooks Online — Guía de conexión y extracción de datos
 
 Guía end-to-end para conectar la app Starcorp (Expo / React Native) a **QuickBooks Online** usando OAuth 2.0 delegado por usuario. Alineada con `CLAUDE.md` + `SKILL.md`: **el cliente nunca llama a `quickbooks.api.intuit.com` directo**; toda petición pasa por una Supabase Edge Function que valida el JWT del usuario y gestiona el `refresh_token` desde `starcorp_vault`.

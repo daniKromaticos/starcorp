@@ -1,3 +1,5 @@
+<p align="right"><img src="../assets/isologo-badge.png" alt="Kromaticos" width="44"></p>
+
 # Correos de Auth (recovery OTP y cambio de correo) — configuración en Dashboard
 
 La app ya implementa el flujo completo (correo → código de 6 dígitos → nueva
